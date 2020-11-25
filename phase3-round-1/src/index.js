@@ -18,7 +18,7 @@ function renderPost(post) {
     image().src = post.image;
     likes().innerText = post.likes === 1 ? `${post.likes} like` : `${post.likes} likes`
     likes().dataset.likes = post.likes;
-    renderComments(post.comments)
+    renderComments(post.comments);
 }
 
 function renderComments(comments) {
@@ -26,6 +26,20 @@ function renderComments(comments) {
         const li = document.createElement('li');
         li.append(comment.content);
         commentList().append(li);
+        addDeleteCommentButton(li, comment.id);
+    })
+}
+
+function addDeleteCommentButton(element, id) {
+    const span = document.createElement('span');
+    span.style = "cursor: pointer; color: red;";
+    span.innerText = ' X';
+    element.append(span);
+    span.addEventListener('click', (event) => {
+        element.remove();
+        fetch(`http://localhost:3000/comments/${id}`, {
+            method: 'DELETE',
+        })
     })
 }
 
@@ -50,11 +64,38 @@ function setupCommentForm() {
 function addComment(event) {
     event.preventDefault();
     const li = document.createElement('li');
-    li.append(event.target.comment.value);
+    const text = event.target.comment.value;
+    li.append(text);
     commentList().append(li);
+    addDeleteCommentButton(li, document.querySelectorAll('li').length);
     commentForm().reset();
+    const comment = {
+        "imageId": 1,
+        "content": text
+    }
+
+    fetch(`http://localhost:3000/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
+    })
+}
+
+function dislike() {
+    likes().addEventListener('dblclick', () => {
+        let newLikes = +likes().dataset.likes - 1;
+        likes().dataset.likes = newLikes;
+        likes().innerText = newLikes === 1 ? `${newLikes} like` : `${newLikes} likes`
+
+        fetch(`${URL}/1`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ likes: newLikes })
+        })
+    })
 }
 
 getPost(1);
 setupLikeButton();
 setupCommentForm();
+dislike();
