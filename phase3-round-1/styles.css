@@ -99,10 +99,14 @@ body {
   list-style-type: none;
   margin-left: 0;
   padding-left: 10px;
+  padding-right: 5px;
   font-size: 0.85rem;
 }
 
 .comments li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 2px 0;
   letter-spacing: 0.2px;
 }
@@ -147,7 +151,7 @@ body {
 
 .delete-comment-button {
   color: rgb(255, 127, 80);
-  font-size: 0.8rem;
+  font-size: 1rem;
   border: none;
   background: none;
   transition: color 300ms;

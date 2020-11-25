@@ -56,14 +56,16 @@ function renderComment(comment) {
 
   let li = document.createElement("li");
   li.dataset.id = comment.id;
-  li.innerText = comment.content;
+
+  let span = document.createElement("span");
+  span.innerText = comment.content;
 
   let button = document.createElement("button");
   button.innerText = "x";
   button.className = "delete-comment-button";
   button.addEventListener("click", (event) => handleDeleteCommentButton(event));
 
-  li.appendChild(button);
+  li.append(span, button);
   commentsUl.append(li);
 }
 
@@ -88,7 +90,7 @@ function handleLikeButton(like) {
 
 function handleAddCommentForm(event) {
   event.preventDefault();
-  if ((event.target.comment.value === "")) {
+  if (event.target.comment.value === "") {
     return;
   }
   const data = {
