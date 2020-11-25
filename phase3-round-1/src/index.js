@@ -30,19 +30,23 @@ function grabImage(imageId){
 
 // Code to put the pic and info up on the page
 function renderImage(imageData){
-    console.log(title())
+    imageCard().id = `image-${imageData.id}`
     title().innerText = imageData.title
     image().src = imageData.image
     likes().innerText = `${imageData.likes} likes`
-    imageData.comments.forEach(comment => {
-        commentLi = document.createElement('li')
-        commentLi.innerText = comment.content
-        commentLi.classList.add(`imageId-${comment.imageId}`)
-        comments().appendChild(commentLi)
-    })
-
+    //make comments conditional to handle likes
+    if(imageData.comments){
+        imageData.comments.forEach(comment => {
+            commentLi = document.createElement('li')
+            commentLi.innerText = comment.content
+            commentLi.classList.add(`imageId-${comment.imageId}`)
+            comments().appendChild(commentLi)
+        })
+    }
     //like button functionality
-    function
+    document.getElementsByClassName('like-button')[0].addEventListener('click', (event) => {
+        likesGoUp(event)
+    })
 }
 
 // - Click on the heart icon to increase image likes, and still see them when I reload the page
@@ -51,8 +55,31 @@ function renderImage(imageData){
 //  this has gotta be a patch request! let's add an event listener to 
 //  the render and then patch it in
 function likesGoUp(event){
-    console.log('Hey ya like me!!!')
-    console.log(event.target)
+    // console.log('Hey ya like me!!!')
+    // console.log(event.target.parentElement.parentElement)
+    let imageId = imageCard().id.split('-')[1]
+    // console.log(imageId)
+    let data = {}
+        data.likes = +likes().innerText.split(' ')[0] + 1
+    console.log(data)
+    let likeObj = {}
+        likeObj.method = "PATCH"
+        likeObj.headers = {"Content-Type": "application/json"}
+        likeObj.body = JSON.stringify(data)
+    
+    fetch(`${url}/images/${imageId}`, likeObj).then(resp => resp.json()).then(updatedImage =>   renderImage(updatedImage))
+
 }
+// me -  
+// Hmmm.  Some weirdness here.  When I console log  the data object click
+// above and click the like I see it trigger th event a bunch of times.
+// from the user side, the experience is one click = one like, but
+// this is no good for my json server.  Will come back to fool with 
+// the event listener if I have time? 
+
+
 
 // - Add a comment (no persistance needed)
+//
+// me 
+//  Piece of pie. Add another event listener to render and  
