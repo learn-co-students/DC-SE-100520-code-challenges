@@ -10,7 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
   //add like-button event
   document
     .getElementById("like-button")
-    .addEventListener("click", handleLikeButton);
+    .addEventListener("click", () => handleLikeButton(1));
+
+  //add like-button event
+  document
+    .getElementById("unlike-button")
+    .addEventListener("click", () => handleLikeButton(-1));
 
   //add comment-form event
   document
@@ -53,12 +58,17 @@ function renderComment(comment) {
   li.dataset.id = comment.id;
   li.innerText = comment.content;
 
+  let button = document.createElement("button");
+  button.innerText = "x";
+  button.addEventListener("click", (event) => handleDeleteCommentButton(event));
+
+  li.appendChild(button);
   commentsUl.append(li);
 }
 
-function handleLikeButton() {
+function handleLikeButton(like) {
   const data = {
-    likes: +likeSpan().innerText.split(" ")[0] + 1,
+    likes: +likeSpan().innerText.split(" ")[0] + like,
   };
 
   const obj = {
@@ -78,6 +88,7 @@ function handleLikeButton() {
 function handleAddCommentForm(event) {
   event.preventDefault();
   const data = {
+    imageId: imageImg().dataset.id,
     content: event.target.comment.value,
   };
 
@@ -87,5 +98,21 @@ function handleAddCommentForm(event) {
     body: JSON.stringify(data),
   };
 
-//   fetch()
+  fetch(`${COMMENTS_URL}`, obj)
+    .then((res) => res.json())
+    .then((comment) => {
+      renderComment(comment);
+      event.target.reset();
+    });
+}
+
+function handleDeleteCommentButton(event) {
+  const obj = {
+    method: "DELETE",
+  };
+
+  const comment_id = event.target.parentElement.dataset.id;
+  fetch(`${COMMENTS_URL}/${comment_id}`, obj).then(() =>
+    event.target.parentElement.remove()
+  );
 }

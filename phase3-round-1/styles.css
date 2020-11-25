@@ -74,6 +74,27 @@ body {
   outline: none;
 }
 
+.unlike-button {
+  color: rgb(143, 143, 143);
+  font-size: 1.5rem;
+  border: none;
+  background: none;
+  transition: color 300ms;
+  cursor: pointer;
+}
+
+.unlike-button:hover {
+  color: rgb(75, 75, 75);
+}
+
+.unlike-button:active {
+  color: rgb(143, 143, 143);
+}
+
+.unlike-button:focus {
+  outline: none;
+}
+
 .comments {
   list-style-type: none;
   margin-left: 0;
