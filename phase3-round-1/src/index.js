@@ -45,7 +45,8 @@ function renderImage(imageData){
     }
     //like button functionality
     document.getElementsByClassName('like-button')[0].addEventListener('click', (event) => {
-        likesGoUp(event)
+        let like = 1
+        likesGoUp(event, like)
     })
 
     //non-persist comments
@@ -56,6 +57,12 @@ function renderImage(imageData){
         // debugger
         addComment(event)
     })
+
+    //stretch goal.  dislike button
+    document.getElementsByClassName('dislike-button')[0].addEventListener('click',(event)=>{
+        let like = -1
+        likesGoUp(event, like)
+    })
 }
 
 // - Click on the heart icon to increase image likes, and still see them when I reload the page
@@ -63,13 +70,13 @@ function renderImage(imageData){
 // me -
 //  this has gotta be a patch request! let's add an event listener to 
 //  the render and then patch it in
-function likesGoUp(event){
+function likesGoUp(event, like){
     // console.log('Hey ya like me!!!')
     // console.log(event.target.parentElement.parentElement)
     let imageId = imageCard().id.split('-')[1]
     // console.log(imageId)
     let data = {}
-        data.likes = +likes().innerText.split(' ')[0] + 1
+        data.likes = +likes().innerText.split(' ')[0] + like
     console.log(data)
     let likeObj = {}
         likeObj.method = "PATCH"
@@ -100,3 +107,16 @@ function addComment(event){
     comments().appendChild(newComment)
     event.target.childNodes[1].value = ""
 }
+
+// STRETCH GOALS
+// - Downvote an image
+// me 
+// yeah, gonna basically do this the same ... wait.  no. Gonna add an 
+// extra param to likesGoUp and be done with the function
+
+
+// - Still see the comments written after reloading the page
+//   > For this one, you want to make a POST request to the `/comments` endpoint.
+//   > Your comment object must have an `imageId` key with a value of `1` for it to work.
+// - Delete a comment
+//   > To persist this, you will have to make a DELETE request to the `/comments/:id` endpoint.
