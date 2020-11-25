@@ -60,6 +60,7 @@ function renderComment(comment) {
 
   let button = document.createElement("button");
   button.innerText = "x";
+  button.className = "delete-comment-button";
   button.addEventListener("click", (event) => handleDeleteCommentButton(event));
 
   li.appendChild(button);
@@ -87,6 +88,9 @@ function handleLikeButton(like) {
 
 function handleAddCommentForm(event) {
   event.preventDefault();
+  if ((event.target.comment.value === "")) {
+    return;
+  }
   const data = {
     imageId: imageImg().dataset.id,
     content: event.target.comment.value,

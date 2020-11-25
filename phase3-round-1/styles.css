@@ -144,3 +144,24 @@ body {
 .comment-button:focus {
   outline: none;
 }
+
+.delete-comment-button {
+  color: rgb(255, 127, 80);
+  font-size: 0.8rem;
+  border: none;
+  background: none;
+  transition: color 300ms;
+  cursor: pointer;
+}
+
+.delete-comment-button:hover {
+  color: rgb(241, 71, 19);
+}
+
+.delete-comment-button:active {
+  color: rgb(255, 127, 80);
+}
+
+.delete-comment-button:focus {
+  outline: none;
+}
