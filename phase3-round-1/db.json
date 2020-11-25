@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Woofing those bugs away",
-      "likes": 0,
+      "likes": 12,
       "image": "./assets/coder-dog.png"
     }
   ],
@@ -17,11 +17,6 @@
       "id": 2,
       "imageId": 1,
       "content": "He's got a nose for bugs!"
-    },
-    {
-      "id": 3,
-      "imageId": 1,
-      "content": "Woof!"
     }
   ]
 }
