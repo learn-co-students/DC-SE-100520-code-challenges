@@ -47,6 +47,15 @@ function renderImage(imageData){
     document.getElementsByClassName('like-button')[0].addEventListener('click', (event) => {
         likesGoUp(event)
     })
+
+    //non-persist comments
+    document.getElementsByClassName('comment-form')[0].addEventListener('submit',(event) => {
+        event.preventDefault()
+        // console.log(document.getElementsByClassName("comment-input")[0].innerText)
+        // console.log(event.target.childNodes[0])
+        // debugger
+        addComment(event)
+    })
 }
 
 // - Click on the heart icon to increase image likes, and still see them when I reload the page
@@ -82,4 +91,12 @@ function likesGoUp(event){
 // - Add a comment (no persistance needed)
 //
 // me 
-//  Piece of pie. Add another event listener to render and  
+//  Piece of pie. Add another event listener to render and come back here
+function addComment(event){
+    // console.log(event.target.childNodes[1].value)
+    newComment = document.createElement('li')
+    newComment.innerText = event.target.childNodes[1].value
+    newComment.classList.add(`imageId-${imageCard().id.split('-')[1]}`)
+    comments().appendChild(newComment)
+    event.target.childNodes[1].value = ""
+}
