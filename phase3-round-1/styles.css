@@ -71,6 +71,16 @@ body {
   cursor: pointer;
 }
 
+.del-button {
+  color: red;
+  font-size: 1.25rem;
+  border: none;
+  background: none;
+  transition: color 300ms;
+  cursor: pointer;
+}
+
+
 .like-button:hover {
   color: rgb(241, 71, 19);
 }

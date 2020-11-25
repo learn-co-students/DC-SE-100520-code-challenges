@@ -5,6 +5,7 @@ let likes = () => document.getElementsByClassName('likes')[0]
 let comments = () => document.getElementsByClassName('comments')[0]
 let image = () => document.getElementsByClassName('image')[0]
 let imageCard = () => document.getElementsByClassName('image-card')[0]
+// const commentDelInnerHTML = `<button class='delete-button'>⌦</button>`
 // The endpoints you will need are:
 // 
 // - GET `/images/1`
@@ -37,10 +38,21 @@ function renderImage(imageData){
     //make comments conditional to handle likes
     if(imageData.comments){
         imageData.comments.forEach(comment => {
-            commentLi = document.createElement('li')
-            commentLi.innerText = comment.content
+            let commentLi = document.createElement('li')
+            let delComment = document.createElement('button')
+            let spanText = document.createElement('span')
+            delComment.innerText = '⌦'
+            delComment.classList.add('del-button')
+            delComment.addEventListener('click',(event)=>{
+                trashComment(event)
+            })
+            commentLi.id = `comment-${comment.id}`
+
+            spanText.innerText = comment.content
+            commentLi.append(delComment, spanText)
             commentLi.classList.add(`imageId-${comment.imageId}`)
-            comments().appendChild(commentLi)
+            
+            comments().append(commentLi)
         })
     }
     //like button functionality
@@ -55,7 +67,7 @@ function renderImage(imageData){
         // console.log(document.getElementsByClassName("comment-input")[0].innerText)
         // console.log(event.target.childNodes[0])
         // debugger
-        addComment(event)
+        writeThatComment(event)
     })
 
     //stretch goal.  dislike button
@@ -99,13 +111,22 @@ function likesGoUp(event, like){
 //
 // me 
 //  Piece of pie. Add another event listener to render and come back here
-function addComment(event){
+function addComment(event, comment = null){
     // console.log(event.target.childNodes[1].value)
-    newComment = document.createElement('li')
-    newComment.innerText = event.target.childNodes[1].value
+    let newComment = document.createElement('li')
+    newComment.id = `comment-${comment.id}`
+    let newSpan = document.createElement('span')
+    newSpan.innerText = event.target.childNodes[1].value
+    let delComment = document.createElement('button')
+    delComment.innerText = '⌦'
+    delComment.classList.add('del-button')
+    delComment.addEventListener('click',(event)=>{
+        trashComment(event)
+    })
+
     newComment.classList.add(`imageId-${imageCard().id.split('-')[1]}`)
+    newComment.append(delComment,newSpan)
     comments().appendChild(newComment)
-    writeThatComment(event)
     event.target.childNodes[1].value = ""
 }
 
@@ -133,9 +154,24 @@ function writeThatComment(event){
         commentObj.headers = {"Content-Type": "application/json"}
         commentObj.body = JSON.stringify(data)
 
-    fetch(`${url}/comments`, commentObj).then(resp => resp.json()).then(comment => console.log(comment))
+    fetch(`${url}/comments`, commentObj).then(resp => resp.json()).then((comment) => addComment(event, comment))
 } 
 
 
 // - Delete a comment
 //   > To persist this, you will have to make a DELETE request to the `/comments/:id` endpoint.
+//
+//me
+//  hmm.  to get this working, we're gonna need to add the comments.id as
+//  an id to each comment (at render and writeThatComment), and a delete
+//  html clickable. then we can fetch delete etc etc
+
+function trashComment(event){
+    // debugger
+    console.log(event.target)
+    let delId = event.target.parentNode.id.split("-")[1]
+    let comment = document.getElementById(event.target.parentNode.id)
+    // console.log(`${url}/comments/${delId}`)
+    fetch(`${url}/comments/${delId}`, {method: 'DELETE'}).then(resp => resp.json()).then(resp => console.log(resp))
+    comment.remove()
+}
