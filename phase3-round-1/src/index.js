@@ -1,9 +1,9 @@
 // write your code here
 const imgURL = 'http://localhost:3000/images'
-const commentsURL ='http://localhost:3000/comments/'
+const commentsURL ='http://localhost:3000/comments'
 const counter = 1
 const counterTwo = 2
-const counterThree = 3
+const counterThree = 3 
 
 
 
@@ -19,7 +19,7 @@ function getImages() {
 }
 
 function getComments() {
-    fetch(`${commentsURL}/1`)
+    fetch(`${commentsURL}`)
     .then(resp => resp.json())
     .then(comment => renderComments(comment))
 }
@@ -41,19 +41,23 @@ function renderImg(img) {
 
  let submit_comment =  document.querySelector(".comment-form")
  submit_comment.addEventListener('submit', (event) => {
-     createComment(img ,event)
+     createComment(img, event)
  })
+
+
 }
 
-function renderComments(comment) {
+function renderComments(comments) {
     let commentList = document.querySelector(".comments")
+    commentList.innerHTML = " "
     
-    let newListItem = document.createElement('li')
-    newListItem.innerText = comment.content
-    let firstList = document.getElementsByTagName('li')[0]
-    firstList.innerText = comment.content
-    commentList.append(newListItem)
+    comments.forEach(comment => {
+        let newListItem = document.createElement('li')
+        newListItem.innerText = comment.content
+        commentList.appendChild(newListItem)
+    })
 }
+    
 
 function createComment(img, event) {
     event.preventDefault()
@@ -62,17 +66,13 @@ function createComment(img, event) {
     newComment.imageId = img.id,
     newComment.content = event.target.comment.value
 
-    fetch(commentsURL, {
+    fetch(`${commentsURL}`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(newComment)
-    }).then(resp => resp.json)
+    }).then(resp => resp.json())
     .then(comment => renderComments(comment))
-
 }
-
-
-
 
 
 function addLikes(likes, img) {
