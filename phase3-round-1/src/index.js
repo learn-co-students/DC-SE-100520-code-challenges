@@ -3,6 +3,8 @@ const url =  'http://localhost:3000/images/1'
 
 document.addEventListener('DOMContentLoaded', () => {
     getImage()
+
+
       
 })
 
@@ -26,33 +28,40 @@ function renderContent(post){
     let postLikes = document.getElementById('likes')
         postLikes.innerText = `${post.likes} likes`
 
-    // let postComments = document.querySelectorAll('ul > li')
-    //     // postCommnets.innerText = post.
-        //  console.log(post.comments)
+    let postComments = document.querySelectorAll('li') //not complete
+         console.log(post.comments[0].content)
 
     let likeBtn = document.querySelector('#likeBtn')
       likeBtn.addEventListener('click', (event) => {
           getLikes(event, postLikes)
       })
 
+    let postAComment= document.querySelector('#commentBtn')
+      postAComment.addEventListener('submit',(event) =>{ 
+          
+      })
 
 }
 
+//I got this function to work but I am not confident in my undersatnding 
 function getLikes(event, postLikes){
 
   let likes = +postLikes.innerText.split(" ")[0] + 1;
-
-
-  fetch(url, {
+  fetch(url, 
+    {
     method: "PATCH",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({likes: likes})
-  }).then((res) => res.json())
+  })
+    .then((res) => res.json())
     .then((post) => postLikes.innerText = `${post.likes} likes`)
 
 
 }
 
 
-// Click on the heart icon to increase image likes, and still see them when I reload the page
 // Add a comment (no persistance needed)
+// function createComment(event){
+//     event.preventDefault()
+
+// }
