@@ -105,6 +105,7 @@ function addComment(event){
     newComment.innerText = event.target.childNodes[1].value
     newComment.classList.add(`imageId-${imageCard().id.split('-')[1]}`)
     comments().appendChild(newComment)
+    writeThatComment(event)
     event.target.childNodes[1].value = ""
 }
 
@@ -118,5 +119,23 @@ function addComment(event){
 // - Still see the comments written after reloading the page
 //   > For this one, you want to make a POST request to the `/comments` endpoint.
 //   > Your comment object must have an `imageId` key with a value of `1` for it to work.
+//me
+//  let's write the fetch post for this sucker and then figure out the
+//  details on calling it
+function writeThatComment(event){
+    // console.log(imageCard().id)
+    let data = {}
+        data.imageId = +imageCard().id.split("-")[1]
+        data.content = event.target.childNodes[1].value
+    
+    let commentObj = {}
+        commentObj.method = "POST"
+        commentObj.headers = {"Content-Type": "application/json"}
+        commentObj.body = JSON.stringify(data)
+
+    fetch(`${url}/comments`, commentObj).then(resp => resp.json()).then(comment => console.log(comment))
+} 
+
+
 // - Delete a comment
 //   > To persist this, you will have to make a DELETE request to the `/comments/:id` endpoint.
