@@ -43,7 +43,6 @@ function renderBeer(beer){
 
 function updateBeer(event){
     // debugger
-    event.preventDefault()
 
     let newBeerDescription = event.target[0].value
     
@@ -61,3 +60,4 @@ function updateBeer(event){
         .then(res => res.json())
         .then(beer => renderBeer(beer))
 }
+
