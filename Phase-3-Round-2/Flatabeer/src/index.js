@@ -73,24 +73,11 @@ function addReview(event){
     //post rqst
     //get review content
     event.preventDefault()
-    console.log(event)
-    debugger
 
-    let newReview = event.target.firstElementChild.value
-        // just wanted to try a different method from target[0]
-    // package new content
-    let newReviewData = {
-        reviews: newReview
-    }
-    // metadata
-    // let reviewMetaData = {
-    //     method: "PATCH",
-    //     headers: {"Content-Type": "application/json"},
-    //     body: JSON.stringify(newReviewData)
-    }
-    // update DB
-    // fetch(url, reviewMetaData)
-    //     .then(res => res.json())
-    //     .then(console.log)
-// }
+    let li = document.createElement(`li`)
+    li.innerText = event.target.firstElementChild.value
+    
+    let beerReviews = document.querySelector('.reviews')
+    beerReviews.appendChild(li)
+}
 
