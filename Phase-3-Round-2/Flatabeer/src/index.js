@@ -1,17 +1,17 @@
-const url = 'http://localhost:3000/beers/1'
+const url = 'http://localhost:3000/beers'
 const updateBtn = () => document.querySelector('.description')
 const reviewBtn = () => document.querySelector('.review-form')
 
 //ON PAGE LOAD
 document.addEventListener('DOMContentLoaded', () => {
     //see FIRST beer's details
-    fetch(url)
+    fetch(url+"/1")
         .then(res => res.json())
         .then(beer => renderBeer(beer))
 
     //update beer and persist
     //submit a form
-    updateBtn().addEventListener('submit', (event) =>{
+    updateBtn().addEventListener('submit', (event) => {
         updateBeer(event)
     })
 
@@ -45,9 +45,8 @@ function renderBeer(beer){
         li.innerText = review
         beerReviews.appendChild(li)
     })
-
-    
 }
+
 
 function updateBeer(event){
     // debugger
@@ -76,22 +75,22 @@ function addReview(event){
     event.preventDefault()
     console.log(event)
     debugger
+
     let newReview = event.target.firstElementChild.value
-        //just wanted to try a different method from target[0]
-    //package new content
+        // just wanted to try a different method from target[0]
+    // package new content
     let newReviewData = {
         reviews: newReview
     }
     // metadata
-    let reviewMetaData = {
-        method: "PATCH",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(newReviewData)
+    // let reviewMetaData = {
+    //     method: "PATCH",
+    //     headers: {"Content-Type": "application/json"},
+    //     body: JSON.stringify(newReviewData)
     }
     // update DB
-    fetch(url, reviewMetaData)
-        .then(res => res.json())
-        .then(console.log)
-
-}
+    // fetch(url, reviewMetaData)
+    //     .then(res => res.json())
+    //     .then(console.log)
+// }
 
