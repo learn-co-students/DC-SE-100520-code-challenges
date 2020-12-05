@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderBeer(beer){
 
-    const id = beer.id
     //include name
     let beerName = document.querySelector('#beerName')
     beerName.innerText = beer.name
@@ -47,8 +46,8 @@ function renderBeer(beer){
         beerReviews.appendChild(li)
     })
 
+    
 }
-
 
 function updateBeer(event){
     // debugger
@@ -75,24 +74,24 @@ function addReview(event){
     //post rqst
     //get review content
     event.preventDefault()
-    
+    console.log(event)
+    debugger
     let newReview = event.target.firstElementChild.value
         //just wanted to try a different method from target[0]
     //package new content
     let newReviewData = {
         reviews: newReview
     }
-    //metadata
+    // metadata
     let reviewMetaData = {
-        method: "POST",
+        method: "PATCH",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(newReviewData)
     }
-    debugger
-    //update DB
-    fetch(`http://localhost:3000/beers/${id}`, reviewMetaData)
+    // update DB
+    fetch(url, reviewMetaData)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(console.log)
 
 }
 
