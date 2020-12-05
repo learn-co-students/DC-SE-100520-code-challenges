@@ -1,5 +1,6 @@
 const url = 'http://localhost:3000/beers/1'
 const updateBtn = () => document.querySelector('.description')
+const reviewBtn = () => document.querySelector('.review-form')
 
 //ON PAGE LOAD
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,10 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
     updateBtn().addEventListener('submit', (event) =>{
         updateBeer(event)
     })
-})
+
+    //add a review, submit
+    reviewBtn().addEventListener('submit', (event) => {
+        addReview(event)
+    })
+}) // closes DOMContentLoaded
 
 
 function renderBeer(beer){
+
+    const id = beer.id
     //include name
     let beerName = document.querySelector('#beerName')
     beerName.innerText = beer.name
@@ -38,6 +46,7 @@ function renderBeer(beer){
         li.innerText = review
         beerReviews.appendChild(li)
     })
+
 }
 
 
@@ -59,5 +68,31 @@ function updateBeer(event){
     fetch(url, metaData)
         .then(res => res.json())
         .then(beer => renderBeer(beer))
+}
+
+//add a review
+function addReview(event){
+    //post rqst
+    //get review content
+    event.preventDefault()
+    
+    let newReview = event.target.firstElementChild.value
+        //just wanted to try a different method from target[0]
+    //package new content
+    let newReviewData = {
+        reviews: newReview
+    }
+    //metadata
+    let reviewMetaData = {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(newReviewData)
+    }
+    debugger
+    //update DB
+    fetch(`http://localhost:3000/beers/${id}`, reviewMetaData)
+        .then(res => res.json())
+        .then(data => console.log(data))
+
 }
 
