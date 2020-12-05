@@ -1,4 +1,5 @@
 const url = 'http://localhost:3000/beers/1'
+const updateBtn = () => document.querySelector('.description')
 
 //ON PAGE LOAD
 document.addEventListener('DOMContentLoaded', () => {
@@ -6,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(url)
         .then(res => res.json())
         .then(beer => renderBeer(beer))
+
+    //update beer and persist
+    //submit a form
+    updateBtn().addEventListener('submit', (event) =>{
+        updateBeer(event)
+    })
 })
 
 
@@ -31,7 +38,26 @@ function renderBeer(beer){
         li.innerText = review
         beerReviews.appendChild(li)
     })
+}
 
 
+function updateBeer(event){
+    // debugger
+    event.preventDefault()
 
+    let newBeerDescription = event.target[0].value
+    
+    let newBeerData = {
+        description: newBeerDescription
+    }
+
+    let metaData = {
+        method: "PATCH",
+        headers: {"Content-Type": "application/json"}, 
+        body: JSON.stringify(newBeerData)
+    }
+
+    fetch(url, metaData)
+        .then(res => res.json())
+        .then(beer => renderBeer(beer))
 }
