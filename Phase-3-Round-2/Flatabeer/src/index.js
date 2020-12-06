@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded',(event)=> {
     let postAReview = document.querySelector('form.review-form')
     postAReview.addEventListener('submit',(event) => {
         event.preventDefault()
-        addReview(event)         
+        addReview(event)
+        postAReview.reset()
+
+                
     })
     let descForm = document.querySelector('form.description')
     let updateBtn = document.querySelector('button.updateBtn')
@@ -36,7 +39,6 @@ function renderBeer(beer){
         beerDesc.innerText = beer.description
     let beerReviewUl = document.querySelector('ul.reviews')
 
-    beerReviewUl.innerHtml = " "
     
     beer.reviews.forEach(review => {   
         let li = document.createElement('li') 
@@ -56,14 +58,14 @@ function addReview(event){
     newLi.innerText = event.target.textInp.value
 
     let beerReviewUl = document.querySelector('ul.reviews')
+
     beerReviewUl.appendChild(newLi)
     } 
 
 function upDateBeer(event,descForm){
    
-     console.log(event.currentTarget)
      newDescInput = event.target.parentNode.beerTextDesc.value
-     descForm.innerHtml =  newDescInput
+     descForm.innerHtml =  newDescInput/
     fetch(beerUrl + 1, {
         method: "PATCH",
         headers:{"Content-Type": "application/json"},
