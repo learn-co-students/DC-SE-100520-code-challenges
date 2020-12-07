@@ -1,11 +1,11 @@
-const url = 'http://localhost:3000/beers'
+const url = 'http://localhost:3000/beers/1'
 const updateBtn = () => document.querySelector('.description')
 const reviewBtn = () => document.querySelector('.review-form')
 
 //ON PAGE LOAD
 document.addEventListener('DOMContentLoaded', () => {
     //see FIRST beer's details
-    fetch(url+"/1")
+    fetch(url)
         .then(res => res.json())
         .then(beer => renderBeer(beer))
 
@@ -50,7 +50,7 @@ function renderBeer(beer){
 
 function updateBeer(event){
     // debugger
-
+    event.preventDefault()
     let newBeerDescription = event.target[0].value
     
     let newBeerData = {
