@@ -54,7 +54,9 @@ function renderBeer(beer){
      ul.append(li)
    })
 
-
+   document.querySelector('.review-form').addEventListener('submit', (event) => {
+      addReview(event)
+   })
    
    //ul.appendChild(li)
    beerBox.append(h2, img, beerText)
@@ -78,6 +80,7 @@ function renderBeer(beer){
 
 
 function updateDescrip(event){
+  event.preventDefault()
     
 //debugger
     let data = {
@@ -86,8 +89,8 @@ function updateDescrip(event){
 //console.log(event.target.firstElementChild.value)
 
     let reqObj = {}
-    reqObj.method = "PATCH"
-    reqObj.headers ={"Content-Type": "application/json"}
+    reqObj.method = "PATCH",
+    reqObj.headers ={"Content-Type": "application/json"},
     reqObj.body = JSON.stringify(data)
 
     fetch(URL, reqObj)
@@ -96,3 +99,19 @@ function updateDescrip(event){
       
   }
 
+
+
+function addReview(event){
+  
+
+ debugger 
+  let newReview = event.target.firstElementChild.value
+
+ 
+  let li = document.createElement('li')
+  li.innerText = newReview
+
+ let ul = document.querySelector('.reviews')
+  ul.append(li)
+  
+}
