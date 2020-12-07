@@ -1,11 +1,17 @@
 // Code here
 
 const URL = "http://localhost:3000/beers/1"
-
+const ul = document.querySelector('reviews')
+const ul_list = () => document.querySelector('reviews')
 
 document.addEventListener('DOMContentLoaded', () => {
     getBeer()
-   
+    getBeerReview()
+
+     document.querySelector('form').addEventListener('submit', (event) => {
+      addReview(event)
+      
+    })
 
 })
 
@@ -15,13 +21,18 @@ function getBeer(){
      .then (beer =>  renderBeer(beer))
 }
 
-function getBeerReviews(){
-
+function getBeerReview(){
+    fetch(URL)
+ 
+       
+    .then(res => res.json())
+    .then(beer => renderBeerReview(beer))
+    
 }
 
 
 function renderBeer(beer){
-    console.log(beer)
+    //console.log(beer)
    let beerBox = document.getElementsByClassName('beer-details')
 
    let h2 = document.querySelector("h2")
@@ -35,32 +46,40 @@ function renderBeer(beer){
     
    beerBox.append(h2, img, beerText)
 }
-function renderBeerReviews(){
+
+function renderBeerReview(beer){
+    // console.log(beer)
+  let reviewArray= beer.reviews
+ //console.log(reviewArray)
+  reviewArray.forEach((review) => {
+    console.log(review)
+    let li = document.createElement('li')
+    li.innerText = review
+
+    li.append(review)
+     ul_list().appendChild(li)
+  })
+   // console.log(reviewArray)
 
 }
 
- let ul = document.querySelector('reviews')
-   let li = document.querySelector('comments-here')
-   li.innerText = beer.reviews
+
 function addReview(event){
     console.log(event)
-    
-    // event.preventDefault() // means when we click submit it's going to do something 
+    event.preventDefault() 
 
-    // let data = {
-    //   name: event.target.name.value,
-    //   image: event.target.image.value,
-    //   likes: 0
-    // }
-    
-    //   let reqObj = {}
+    let data = {
+      reviews: event.target.textarea.value
+    }
 
-    //     reqObj.method = "POST"
-    //     reqObj.headers ={"Content-Type": "application/json"}
-    //     reqObj.body = JSON.stringify(data)
+ 
+    let reqObj = {}
+    reqObj.method = "POST"
+    reqObj.headers ={"Content-Type": "application/json"}
+    reqObj.body = JSON.stringify(data)
 
-    //   fetch(URL, reqObj)
-    //     .then(res => res.json())
-    //     .then(data => renderToy(data))
+    fetch(URL, reqObj)
+        .then(res => res.json())
+        .then(data => addReview(data))
   }
 
