@@ -1,8 +1,8 @@
 // Code here
 
 const URL = "http://localhost:3000/beers/1"
-const ul = document.querySelector('reviews')
-const ul_list = () => document.querySelector('reviews')
+const ul = document.querySelector('.reviews')
+
 
 document.addEventListener('DOMContentLoaded', () => {
     getBeer()
@@ -44,11 +44,11 @@ function renderBeer(beer){
    reviewArray.forEach((review) => {
      let li = review
      console.log(li) // in the console, this prints each line item. when I try to append each line item to the ul, only the first review prints in console, and my li still aren't appending  
-     //ul.append(li)
+     ul.append(li)
    })
    
-    
-   beerBox.append(h2, img, beerText, li)
+   
+   beerBox.append(h2, img, beerText)
 }
 
 // function renderBeerReview(beer){
