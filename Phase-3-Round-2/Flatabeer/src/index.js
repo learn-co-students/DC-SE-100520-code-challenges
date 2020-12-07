@@ -1,13 +1,18 @@
 // Code here
 
 const URL = "http://localhost:3000/beers/1"
-const ul = document.querySelector('.reviews')
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
     getBeer()
     getBeerReview()
 
+
+
+    document.querySelector('.description').addEventListener('submit', (event) => {
+        updateDescrip(event)
+    })
 
 })
 
@@ -37,17 +42,21 @@ function renderBeer(beer){
    let img = document.querySelector('img')
    img.src = beer.image_url
 
-   let beerText = document.querySelector('textarea')
+   let beerText = document.querySelector('textarea') 
    beerText.innerText = beer.description
 
    let reviewArray = beer.reviews
    reviewArray.forEach((review) => {
-     let li = review
+     let ul = document.querySelector('.reviews')
+     let li = document.createElement('li')
+     li.innerText = review
      console.log(li) // in the console, this prints each line item. when I try to append each line item to the ul, only the first review prints in console, and my li still aren't appending  
      ul.append(li)
    })
+
+
    
-   
+   //ul.appendChild(li)
    beerBox.append(h2, img, beerText)
 }
 
@@ -69,14 +78,13 @@ function renderBeer(beer){
 
 
 function updateDescrip(event){
-    console.log(event)
-    event.preventDefault() 
-
+    
+//debugger
     let data = {
-      description: event.target.description.value
+      description: event.target.firstElementChild.value
     }
+//console.log(event.target.firstElementChild.value)
 
- 
     let reqObj = {}
     reqObj.method = "PATCH"
     reqObj.headers ={"Content-Type": "application/json"}
@@ -84,7 +92,7 @@ function updateDescrip(event){
 
     fetch(URL, reqObj)
         .then(res => res.json())
-        .then(data => renderBeer(data))
+        .then(beer => renderBeer(beer))
       
   }
 
