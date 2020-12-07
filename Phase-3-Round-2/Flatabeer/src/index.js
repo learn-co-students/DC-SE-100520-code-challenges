@@ -102,9 +102,9 @@ function updateDescrip(event){
 
 
 function addReview(event){
-  
+  event.preventDefault()
 
- debugger 
+ //debugger 
   let newReview = event.target.firstElementChild.value
 
  
