@@ -8,10 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     getBeer()
     getBeerReview()
 
-     document.querySelector('form').addEventListener('submit', (event) => {
-      addReview(event)
-      
-    })
 
 })
 
@@ -43,43 +39,52 @@ function renderBeer(beer){
 
    let beerText = document.querySelector('textarea')
    beerText.innerText = beer.description
+
+   let reviewArray = beer.reviews
+   reviewArray.forEach((review) => {
+     let li = review
+     console.log(li) // in the console, this prints each line item. when I try to append each line item to the ul, only the first review prints in console, and my li still aren't appending  
+     //ul.append(li)
+   })
+   
     
-   beerBox.append(h2, img, beerText)
+   beerBox.append(h2, img, beerText, li)
 }
 
-function renderBeerReview(beer){
-    // console.log(beer)
-  let reviewArray= beer.reviews
- //console.log(reviewArray)
-  reviewArray.forEach((review) => {
-    console.log(review)
-    let li = document.createElement('li')
-    li.innerText = review
+// function renderBeerReview(beer){
+//     // console.log(beer)
+//   let reviewArray= beer.reviews
+//  //console.log(reviewArray)
+//   reviewArray.forEach((review) => {
+//     //console.log(review)
+//     let li = document.createElement('li')
+//     li.innerText = review
 
-    li.append(review)
-     ul_list().appendChild(li)
-  })
-   // console.log(reviewArray)
+//     li.append(review)
+//      ul_list().appendChild(li)
+//   })
+//    // console.log(reviewArray)
 
-}
+// }
 
 
-function addReview(event){
+function updateDescrip(event){
     console.log(event)
     event.preventDefault() 
 
     let data = {
-      reviews: event.target.textarea.value
+      description: event.target.description.value
     }
 
  
     let reqObj = {}
-    reqObj.method = "POST"
+    reqObj.method = "PATCH"
     reqObj.headers ={"Content-Type": "application/json"}
     reqObj.body = JSON.stringify(data)
 
     fetch(URL, reqObj)
         .then(res => res.json())
-        .then(data => addReview(data))
+        .then(data => renderBeer(data))
+      
   }
 
