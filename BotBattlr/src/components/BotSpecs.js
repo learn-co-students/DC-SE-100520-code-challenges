@@ -1,4 +1,5 @@
 import React from "react";
+import BotCollection from '../containers/BotCollection'
 
 const botTypeClasses = {
   Assault: "icon military",
