@@ -42,18 +42,16 @@ const BotCard = (props) => {
             <i className="icon shield" />
             {props.bot.armor}
           </span>
-          {!props.isArmy ? (
-            <span>
-              <div className="ui center aligned segment basic">
-                <button
-                  className="ui mini red button"
-                  onClick={() => props.deleteBot(props.bot.id)}
-                >
-                  x
-                </button>
-              </div>
-            </span>
-          ) : null}
+          <span>
+            <div className="ui center aligned segment basic">
+              <button
+                className="ui mini red button"
+                onClick={() => props.deleteBot(props.bot.id, props.isArmy)}
+              >
+                x
+              </button>
+            </div>
+          </span>
         </div>
       </div>
     </div>
