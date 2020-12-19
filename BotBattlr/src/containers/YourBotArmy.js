@@ -9,7 +9,7 @@ class YourBotArmy extends Component {
       <div className="ui segment inverted olive bot-army">
         <div className="ui five column grid">
           <div className="row bot-army-row">
-            {this.props.bots.map((bot) => <BotCard key={bot.id} bot={bot} clickFunction={this.props.discharge} />)}
+            {this.props.bots.map((bot) => <BotCard key={bot.id} bot={bot} clickFunction={this.props.release} discharge={this.props.discharge} />)}
             Your Bot Army
           </div>
         </div>
