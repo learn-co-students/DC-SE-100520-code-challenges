@@ -48,7 +48,7 @@ const BotCard = props => {
               <button
                 className="ui mini red button"
                 onClick={() =>
-                  console.log("add code to connect event listener")
+                  props.discharge(props.bot.id)
                 }
               >
                 x
