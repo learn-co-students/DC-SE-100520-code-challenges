@@ -50,6 +50,13 @@ class BotsPage extends Component {
       })
     })
   }
+  //for the deliverable, this DOES delete from the backend
+  //this DOES delete from YBA when you click it in the bot army, and deletes
+  //DOES delete bot.id from YBA if clicked in BC...
+  //because while it does briefly add to YBA...
+  //it deletes from backend, and immediately removes, like deliverables ask for
+
+
 
   render() {
     return <div>
