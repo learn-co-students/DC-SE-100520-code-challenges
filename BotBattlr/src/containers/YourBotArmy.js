@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import BotCard from "../components/BotCard";
 
 class YourBotArmy extends Component {
   //your bot army code here...
