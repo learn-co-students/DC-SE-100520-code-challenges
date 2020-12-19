@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import BotCard from "../components/BotCard";
 
 class BotCollection extends Component {
-  //your code here
-
   render() {
     return (
       <div className="ui four column grid">
@@ -13,6 +11,7 @@ class BotCollection extends Component {
               bot={bot}
               key={bot.id}
               handleClick={this.props.myBotArmy}
+              deleteABot={this.props.deleteABot}
             />
           ))}
         </div>

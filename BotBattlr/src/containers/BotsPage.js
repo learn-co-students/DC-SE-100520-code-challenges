@@ -25,9 +25,28 @@ class BotsPage extends Component {
   };
 
   releaseBot = (bot) => {
-    let botsLeft = this.state.myBots.filter((oldBot) => oldBot != bot);
+    let botsLeft = this.state.myBots.filter((oldBot) => oldBot !== bot);
 
     this.setState({ myBots: botsLeft });
+  };
+
+  deleteABot = (botId) => {
+    // fetch(URL + "/" + botId, {
+    //   method: "DELETE",
+    // }).then(() =>
+    //   this.setState{(
+    //     myBots: this.state.myBots.filter((bot) => bot.id !== botId)
+    //   )}
+
+    // )
+    fetch(URL + "/" + botId, {
+      method: "DELETE",
+    }).then(() =>
+      this.setState({
+        myBots: this.state.myBots.filter((bot) => bot.id !== botId),
+        bots: this.state.bots.filter((bot) => bot.id !== botId),
+      })
+    );
   };
 
   render() {
@@ -36,8 +55,13 @@ class BotsPage extends Component {
         <YourBotArmy
           botsData={this.state.myBots}
           releaseBot={this.releaseBot}
+          deleteABot={this.deleteABot}
         />
-        <BotCollection botsData={this.state.bots} myBotArmy={this.myBotArmy} />
+        <BotCollection
+          botsData={this.state.bots}
+          myBotArmy={this.myBotArmy}
+          deleteABot={this.deleteABot}
+        />
       </div>
     );
   }

@@ -14,6 +14,7 @@ class YourBotArmy extends Component {
                 bot={bot}
                 key={bot.id}
                 handleClick={this.props.releaseBot}
+                deleteABot={this.props.deleteABot}
               />
             ))}
           </div>
