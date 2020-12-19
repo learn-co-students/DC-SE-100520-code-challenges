@@ -85,7 +85,12 @@ class BotsPage extends Component {
   }
 
   sortBy = (sortBy) => {
+    // sort the bots by whatever user selects in sortBar, no state needed
     this.setState({bots: this.state.bots.sort((bot1, bot2)=>(bot1[sortBy] > bot2[sortBy])? 1 : -1)})
+  }
+
+  botCollectionMinusYourArmy = () => {
+    return this.state.bots.filter(bot => this.justEnlistedBots().indexOf(bot) === -1)
   }
 
   render() {
@@ -99,7 +104,7 @@ class BotsPage extends Component {
                 <div>
                   {(this.state.specsView)?
                   <BotSpecs bot={this.state.specsView} goback={this.closeSpecs} enlist={this.enlistBot} />
-                  :<BotCollection bots={this.state.bots} enlist={this.showSpecs} discharge={this.dischargeBot} />}
+                  :<BotCollection bots={this.botCollectionMinusYourArmy()} enlist={this.showSpecs} discharge={this.dischargeBot} />}
                 </div>
       
           </div>;
