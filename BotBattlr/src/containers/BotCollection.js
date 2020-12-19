@@ -10,7 +10,11 @@ class BotCollection extends Component {
         <div className="row">
           {
             this.props.allBots.map(bot =>
-            <BotCard bot={bot} key={bot.id}/>
+            <BotCard
+              bot={bot}
+              key={bot.id}
+              handleClick={this.props.addToArmy}
+            />
             )
           }
           
