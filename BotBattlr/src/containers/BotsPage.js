@@ -47,7 +47,6 @@ class BotsPage extends Component {
     this.setState({
       botArmy: newArmy
     })
-    //Trying to remove bot from army did not work
   }
 
   render() {
