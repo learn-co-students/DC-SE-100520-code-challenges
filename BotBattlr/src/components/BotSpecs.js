@@ -53,7 +53,7 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() =>
-                {props.goBack()}
+                {props.goback()}
               }
             >
               Go Back
@@ -61,7 +61,7 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() =>
-                {props.enlist(props.bot); props.goBack();}
+                {props.enlist(props.bot); props.goback();}
               }
             >
               Enlist

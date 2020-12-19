@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy"
 import BotSpecs from "../components/BotSpecs"
+import SortBar from "../components/SortBar"
 
 const URL="http://localhost:6001/bots"
 class BotsPage extends Component {
@@ -11,7 +12,7 @@ class BotsPage extends Component {
   state = {
     bots: [],             // hold all the bots
     enlisted: [],         // holds the ids of the enlisted bots
-    specsView: false      // when not false, display BotSpecs
+    specsView: false,     // when not false, display BotSpecs
   }
 
   componentDidMount(){
@@ -75,7 +76,7 @@ class BotsPage extends Component {
   }
 
   showSpecs = (specBot) => {
-    console.log("set the state to specBot")
+    // set the state to specBot
     this.setState({specsView: specBot})
   }
 
@@ -83,15 +84,21 @@ class BotsPage extends Component {
     this.setState({specsView: false})
   }
 
+  sortBy = (sortBy) => {
+    this.setState({bots: this.state.bots.sort((bot1, bot2)=>(bot1[sortBy] > bot2[sortBy])? 1 : -1)})
+  }
+
   render() {
     return <div>
                 <div>
                   <YourBotArmy bots={this.justEnlistedBots()} release={this.releaseBot} discharge={this.dischargeBot} />
                 </div>
-
+                <div>
+                  <SortBar sortby={this.sortBy} />
+                </div>
                 <div>
                   {(this.state.specsView)?
-                  <BotSpecs bot={this.state.specsView} goBack={this.closeSpecs} enlist={this.enlistBot} />
+                  <BotSpecs bot={this.state.specsView} goback={this.closeSpecs} enlist={this.enlistBot} />
                   :<BotCollection bots={this.state.bots} enlist={this.showSpecs} discharge={this.dischargeBot} />}
                 </div>
       
