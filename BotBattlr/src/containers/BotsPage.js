@@ -38,20 +38,24 @@ class BotsPage extends Component {
 
   addBotArmyHandler = (id) => {
     if (!this.state.botArmy.some((bot) => bot.id === id)) {
+      let botCollection = [...this.state.botCollection];
+      const idx = botCollection.findIndex((bot) => bot.id === id);
+      const bot = botCollection.splice(idx, 1)[0];
       this.setState({
-        botArmy: [
-          ...this.state.botArmy,
-          this.state.botCollection.find((b) => b.id === id),
-        ],
+        botArmy: [...this.state.botArmy, bot],
+        botCollection: botCollection,
       });
       this.goBackHandler();
     }
   };
 
   removeBotArmyHandler = (id) => {
-    console.log(id)
+    let botArmy = [...this.state.botArmy];
+    const idx = botArmy.findIndex((bot) => bot.id === id);
+    const bot = botArmy.splice(idx, 1)[0];
     this.setState({
-      botArmy: [...this.state.botArmy.filter((botArmy) => botArmy.id !== id)],
+      botArmy: botArmy,
+      botCollection: [...this.state.botCollection, bot],
     });
   };
 
@@ -64,7 +68,7 @@ class BotsPage extends Component {
 
     fetch(deleteUrl, reqObj)
       .then((res) => res.json())
-      .then((json) => this.dischargeBot(id))
+      .then(() => this.dischargeBot(id))
       .catch((err) => console.log(err));
   };
 
@@ -80,17 +84,16 @@ class BotsPage extends Component {
     }
   };
 
-  render() {
-    const { botCollection, botArmy, botSpecs } = this.state;
+  renderCollection = () => {
+    const { botSpecs, botCollection } = this.state;
     const {
-      cardClickHandler,
-      removeBotArmyHandler,
-      deleteBot,
       goBackHandler,
       addBotArmyHandler,
+      cardClickHandler,
+      deleteBot,
     } = this;
 
-    const renderCollection = this.state.botSpecsActive ? (
+    return this.state.botSpecsActive ? (
       <BotSpecs
         bot={botSpecs}
         goBackHandler={goBackHandler}
@@ -103,12 +106,16 @@ class BotsPage extends Component {
         deleteBot={deleteBot}
       />
     );
+  };
+
+  render() {
+    const renderCollection = this.renderCollection();
 
     return (
       <div>
         <YourBotArmy
-          botArmy={botArmy}
-          removeBotArmyHandler={removeBotArmyHandler}
+          botArmy={this.state.botArmy}
+          removeBotArmyHandler={this.removeBotArmyHandler}
         />
         {renderCollection}
       </div>
