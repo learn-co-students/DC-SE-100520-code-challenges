@@ -17,32 +17,62 @@ class BotsPage extends Component {
       .catch((err) => console.log(err));
   }
 
-  addBotArmyHandle = (bot) => {
-    if (!this.state.botArmy.includes(bot)) {
-      this.setState({ botArmy: [...this.state.botArmy, bot] });
+  addBotArmyHandle = (id) => {
+    if (!this.state.botArmy.some((bot) => bot.id === id)) {
+      this.setState({
+        botArmy: [
+          ...this.state.botArmy,
+          this.state.botCollection.find((bot) => bot.id === id),
+        ],
+      });
     }
   };
 
-  removeBotArmyHandle = (bot) => {
+  removeBotArmyHandle = (id) => {
     this.setState({
-      botArmy: [
-        ...this.state.botArmy.filter((botArmy) => botArmy.id !== bot.id),
-      ],
+      botArmy: [...this.state.botArmy.filter((botArmy) => botArmy.id !== id)],
     });
+  };
+
+  deleteBot = (id) => {
+    const deleteUrl = `${url}/${id}`;
+    const reqObj = {
+      method: "DELETE",
+    };
+    console.log(deleteUrl, reqObj);
+
+    fetch(deleteUrl, reqObj)
+      .then((res) => res.json())
+      .then((json) => this.dischargeBot(id))
+      .catch((err) => console.log(err));
+  };
+
+  dischargeBot = (id) => {
+    let botCollection = [...this.state.botCollection];
+    const updatedBotCollection = botCollection.filter((bot) => bot.id !== id);
+    this.setState({
+      botCollection: updatedBotCollection,
+    });
+
+    if (this.state.botArmy.some((bot) => bot.id === id)) {
+      this.removeBotArmyHandle(id);
+    }
   };
 
   render() {
     const { botCollection, botArmy } = this.state;
+    const { addBotArmyHandle, removeBotArmyHandle, deleteBot } = this;
 
     return (
       <div>
         <YourBotArmy
           botArmy={botArmy}
-          removeBotArmyHandle={this.removeBotArmyHandle}
+          removeBotArmyHandle={removeBotArmyHandle}
         />
         <BotCollection
           botCollection={botCollection}
-          addBotArmyHandle={this.addBotArmyHandle}
+          addBotArmyHandle={addBotArmyHandle}
+          deleteBot={deleteBot}
         />
       </div>
     );

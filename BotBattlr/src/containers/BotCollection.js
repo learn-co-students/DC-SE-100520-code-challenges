@@ -13,6 +13,7 @@ class BotCollection extends Component {
               key={bot.id}
               bot={bot}
               botClickHandle={this.props.addBotArmyHandle}
+              deleteBot={this.props.deleteBot}
             />
           ))}
         </div>
