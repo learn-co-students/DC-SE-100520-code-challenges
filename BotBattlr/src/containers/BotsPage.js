@@ -8,7 +8,7 @@ class BotsPage extends Component {
   //start here with your code for step one
   state = {
     bots: [],
-    // myBots: [],
+    myBots: [],
   };
 
   async componentDidMount() {
@@ -19,16 +19,25 @@ class BotsPage extends Component {
   }
 
   myBotArmy = (bot) => {
-    // this.setState({ myBots: bot });
-    // console.log(this.state.myBots);
-    console.log(bot);
+    if (!this.state.myBots.includes(bot)) {
+      this.setState({ myBots: [...this.state.myBots, bot] });
+    }
+  };
+
+  releaseBot = (bot) => {
+    let botsLeft = this.state.myBots.filter((oldBot) => oldBot != bot);
+
+    this.setState({ myBots: botsLeft });
   };
 
   render() {
     return (
       <div>
+        <YourBotArmy
+          botsData={this.state.myBots}
+          releaseBot={this.releaseBot}
+        />
         <BotCollection botsData={this.state.bots} myBotArmy={this.myBotArmy} />
-        <YourBotArmy />
       </div>
     );
   }
