@@ -42,7 +42,11 @@ class BotsPage extends Component {
 
     this.componentDidMount()
     //to fresh page
-    this.removeBot()
+    let newArmy = this.state.botArmy.filter(robot => robot != bot)
+
+    this.setState({
+      botArmy: newArmy
+    })
     //Trying to remove bot from army did not work
   }
 
