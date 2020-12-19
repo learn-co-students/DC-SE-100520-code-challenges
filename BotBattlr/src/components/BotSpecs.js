@@ -6,10 +6,10 @@ const botTypeClasses = {
   Support: "icon plus circle",
   Medic: "icon ambulance",
   Witch: "icon magic",
-  Captain: "icon star"
+  Captain: "icon star",
 };
 
-const BotSpecs = props => {
+const BotSpecs = (props) => {
   return (
     <div className="ui segment">
       <div className="ui two column centered grid">
@@ -52,21 +52,28 @@ const BotSpecs = props => {
             </div>
             <button
               className="ui button fluid"
-              onClick={() =>
-                console.log("connect this to a function that shows all bots")
-              }
+              onClick={() => props.display(props.bot)}
             >
               Go Back
             </button>
             <button
               className="ui button fluid"
-              onClick={() =>
-                console.log(
-                  "connect this to a function that adds this bot to your bot army list"
-                )
-              }
+              onClick={() => {
+                props.enlistBot(props.bot);
+                props.display(props.bot);
+              }}
             >
               Enlist
+            </button>
+            <button
+              style={{ background: "red" }}
+              className="ui button fluid"
+              onClick={() => {
+                props.destroyBot(props.bot.id);
+                props.display(props.bot);
+              }}
+            >
+              Release From Mortal Coil
             </button>
           </div>
         </div>
