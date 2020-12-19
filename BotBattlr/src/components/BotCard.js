@@ -16,9 +16,9 @@ const BotCard = props => {
       <div
         className="ui card"
         key={props.bot.id}
-        onClick={() => props.clickAction(props.bot)}
-      >
-        <div className="image">
+        
+        >
+        <div className="image" onClick={() => props.clickAction(props.bot)}>
           <img alt="oh no!" src={props.bot.avatar_url} />
         </div>
         <div className="content">
@@ -49,7 +49,7 @@ const BotCard = props => {
               <button
                 className="ui mini red button"
                 onClick={() =>
-                  console.log("add code to connect event listener")
+                  props.deleteRobot(props.bot)
                 }
               >
                 x

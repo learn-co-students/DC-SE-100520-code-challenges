@@ -31,14 +31,30 @@ class BotsPage extends Component {
     })
   }
 
+  deleteRobot = (bot) => {
+    let url = "http://localhost:6001/bots";
+    fetch(`${url}/${bot.id}`, {
+      method: 'DELETE',
+      headers: {"Content-type": "application/json"},
+      body: JSON.stringify(bot)
+    })
+    .then(response => response.json())
+
+    this.componentDidMount()
+    //to fresh page
+    this.removeBot()
+    //Trying to remove bot from army did not work
+  }
+
   render() {
     return (
       <div>
         <BotCollection 
         bots={this.state.bots} 
         addBot={this.army}
+        deleteRobot={this.deleteRobot}
         /> 
-        <YourBotArmy removeBot={this.removeBot} army={this.state.botArmy}/>
+        <YourBotArmy deleteRobot={this.deleteRobot} removeBot={this.removeBot} army={this.state.botArmy}/>
       </div>
     );
   }

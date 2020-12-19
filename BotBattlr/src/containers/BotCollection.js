@@ -9,7 +9,7 @@ class BotCollection extends Component {
 
   renderBots = () => {
     let botsArray = this.props.bots
-    return botsArray.map((bot) => <BotCard bot={bot} key={bot.id} clickAction={this.props.addBot} />)
+    return botsArray.map((bot) => <BotCard bot={bot} key={bot.id} clickAction={this.props.addBot} deleteRobot={this.props.deleteRobot}/>)
   }
   
   render() {

@@ -7,11 +7,10 @@ class YourBotArmy extends Component {
 
   renderBots = () => {
     let botsArray = this.props.army
-    return botsArray.map((bot) => <BotCard bot={bot} key={bot.id} clickAction={this.props.removeBot}/>)
+    return botsArray.map((bot, index) => <BotCard bot={bot} key={index} clickAction={this.props.removeBot} deleteRobot={this.props.deleteRobot}/>)
   }
 
   render() {
-    console.log(this.props.army);
 
     return (
       <div className="ui segment inverted olive bot-army">
