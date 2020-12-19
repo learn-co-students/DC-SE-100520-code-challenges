@@ -40,23 +40,18 @@ class BotsPage extends Component {
     console.log('discharge connection is good')
     console.log(url + id)
     //delete from backend
-    return fetch(url + id, {method: 'DELETE'})
-    .then(resp => resp.json())
-    // when I clg resp.json, promise shows
-    .then(newBots => {
-    //newBots comes back as an empty obj
+    fetch(url + id, {method: 'DELETE'})
+    .then(() =>
         this.setState({
+        bots: this.state.bots.filter(bot => bot.id !== id),
         armyBots: this.state.armyBots.filter(bot => bot.id !== id)
       })
-    })
+    )
   }
-  //for the deliverable, this DOES delete from the backend
-  //this DOES delete from YBA when you click it in the bot army, and deletes
-  //DOES delete bot.id from YBA if clicked in BC...
-  //because while it does briefly add to YBA...
-  //it deletes from backend, and immediately removes, like deliverables ask for
-
-
+  //I have this updating the Bot Collection on the front end too, not just YourBotArmy
+  //Otherwise had to refresh the browser from them to remove
+  //And in the process could be re-added, but would error when re-deleting (b/c they were already deleted)
+  //Since deliverables only ask for it to delete from YourBotArmy, we can take the setState for bots out if that's better! 
 
   render() {
     return <div>
