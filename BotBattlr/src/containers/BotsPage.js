@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+
+import BotSpecs from "../components/BotSpecs";
+
 import YourBotArmy from "./YourBotArmy";
 import BotCollection from "./BotCollection";
 
@@ -8,6 +11,8 @@ class BotsPage extends Component {
   state = {
     botCollection: [],
     botArmy: [],
+    botSpecsActive: false,
+    botSpecs: {},
   };
 
   componentDidMount() {
@@ -17,18 +22,34 @@ class BotsPage extends Component {
       .catch((err) => console.log(err));
   }
 
-  addBotArmyHandle = (id) => {
+  cardClickHandler = (id) => {
+    this.setState({
+      botSpecsActive: true,
+      botSpecs: this.state.botCollection.find((bot) => bot.id === id),
+    });
+  };
+
+  goBackHandler = () => {
+    this.setState({
+      botSpecsActive: false,
+      botSpecs: {},
+    });
+  };
+
+  addBotArmyHandler = (id) => {
     if (!this.state.botArmy.some((bot) => bot.id === id)) {
       this.setState({
         botArmy: [
           ...this.state.botArmy,
-          this.state.botCollection.find((bot) => bot.id === id),
+          this.state.botCollection.find((b) => b.id === id),
         ],
       });
+      this.goBackHandler();
     }
   };
 
-  removeBotArmyHandle = (id) => {
+  removeBotArmyHandler = (id) => {
+    console.log(id)
     this.setState({
       botArmy: [...this.state.botArmy.filter((botArmy) => botArmy.id !== id)],
     });
@@ -55,25 +76,41 @@ class BotsPage extends Component {
     });
 
     if (this.state.botArmy.some((bot) => bot.id === id)) {
-      this.removeBotArmyHandle(id);
+      this.removeBotArmyHandler(id);
     }
   };
 
   render() {
-    const { botCollection, botArmy } = this.state;
-    const { addBotArmyHandle, removeBotArmyHandle, deleteBot } = this;
+    const { botCollection, botArmy, botSpecs } = this.state;
+    const {
+      cardClickHandler,
+      removeBotArmyHandler,
+      deleteBot,
+      goBackHandler,
+      addBotArmyHandler,
+    } = this;
+
+    const renderCollection = this.state.botSpecsActive ? (
+      <BotSpecs
+        bot={botSpecs}
+        goBackHandler={goBackHandler}
+        addBotArmyHandler={addBotArmyHandler}
+      />
+    ) : (
+      <BotCollection
+        botCollection={botCollection}
+        cardClickHandler={cardClickHandler}
+        deleteBot={deleteBot}
+      />
+    );
 
     return (
       <div>
         <YourBotArmy
           botArmy={botArmy}
-          removeBotArmyHandle={removeBotArmyHandle}
+          removeBotArmyHandler={removeBotArmyHandler}
         />
-        <BotCollection
-          botCollection={botCollection}
-          addBotArmyHandle={addBotArmyHandle}
-          deleteBot={deleteBot}
-        />
+        {renderCollection}
       </div>
     );
   }

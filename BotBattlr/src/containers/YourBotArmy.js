@@ -13,7 +13,7 @@ class YourBotArmy extends Component {
             <BotCard
               key={bot.id}
               bot={bot}
-              botClickHandle={this.props.removeBotArmyHandle}
+              botClickHandle={this.props.removeBotArmyHandler}
               isArmy={true}
             />
           ))}
