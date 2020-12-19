@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy"
+import BotSpecs from "../components/BotSpecs"
 
 const URL="http://localhost:6001/bots"
 class BotsPage extends Component {
@@ -9,7 +10,8 @@ class BotsPage extends Component {
   
   state = {
     bots: [],             // hold all the bots
-    enlisted: []          // holds the ids of the enlisted bots
+    enlisted: [],         // holds the ids of the enlisted bots
+    specsView: false      // when not false, display BotSpecs
   }
 
   componentDidMount(){
@@ -72,6 +74,15 @@ class BotsPage extends Component {
     this.dischargeBot(byeByeBot)
   }
 
+  showSpecs = (specBot) => {
+    console.log("set the state to specBot")
+    this.setState({specsView: specBot})
+  }
+
+  closeSpecs = () => {
+    this.setState({specsView: false})
+  }
+
   render() {
     return <div>
                 <div>
@@ -79,7 +90,9 @@ class BotsPage extends Component {
                 </div>
 
                 <div>
-                  <BotCollection bots={this.state.bots} enlist={this.enlistBot} discharge={this.dischargeBot} />
+                  {(this.state.specsView)?
+                  <BotSpecs bot={this.state.specsView} goBack={this.closeSpecs} enlist={this.enlistBot} />
+                  :<BotCollection bots={this.state.bots} enlist={this.showSpecs} discharge={this.dischargeBot} />}
                 </div>
       
           </div>;
