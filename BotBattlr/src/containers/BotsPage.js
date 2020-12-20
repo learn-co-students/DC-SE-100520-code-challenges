@@ -25,20 +25,13 @@ class BotsPage extends Component {
   };
 
   releaseBot = (bot) => {
+    //releaseBot should delete this bot from my bot army array
     let botsLeft = this.state.myBots.filter((oldBot) => oldBot !== bot);
 
     this.setState({ myBots: botsLeft });
   };
 
   deleteABot = (botId) => {
-    // fetch(URL + "/" + botId, {
-    //   method: "DELETE",
-    // }).then(() =>
-    //   this.setState{(
-    //     myBots: this.state.myBots.filter((bot) => bot.id !== botId)
-    //   )}
-
-    // )
     fetch(URL + "/" + botId, {
       method: "DELETE",
     }).then(() =>
