@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from "../components/BotSpecs";
 
 const URL = "http://localhost:6001/bots/";
 
@@ -11,6 +12,7 @@ class BotsPage extends Component {
     this.state = {
       bots: [],
       army: [],
+      specsPage: null,
     };
   }
 
@@ -34,8 +36,7 @@ class BotsPage extends Component {
 
   removeBots = (bot) => {
     //if bot is clicked, remove bot from bot Army
-    let removeBot = this.state.army.filter((armyBot) => (
-      armyBot.id !== bot.id));
+    let removeBot = this.state.army.filter((armyBot) => armyBot.id !== bot.id);
     this.setState({
       army: removeBot,
     });
@@ -43,15 +44,25 @@ class BotsPage extends Component {
 
   deleteBots = (bot) => {
     fetch(URL + bot.id, {
-      method: 'DELETE'
-    }).then(resp => resp.json())
+      method: "DELETE",
+    }).then((resp) => resp.json());
     console.log("delete");
-    let deleteBot = this.state.bots.filter(deadBot => (
-      deadBot.id !== bot.id))
+    let deleteBot = this.state.bots.filter((deadBot) => deadBot.id !== bot.id);
     this.setState({
-      bots: deleteBot
-    })
-    this.removeBots(bot)
+      bots: deleteBot,
+    });
+    this.removeBots(bot);
+  };
+  handleSpecPage = (bot) => {
+    this.setState({
+      specsPage: bot,
+    });
+  };
+
+  goBack = () => {
+    this.setState({
+      specsPage: null,
+    });
   };
 
   render() {
@@ -62,11 +73,16 @@ class BotsPage extends Component {
           removeBot={this.removeBots}
           deleteBots={this.deleteBots}
         />
-        <BotCollection
-          bots={this.state.bots}
-          addBots={this.addBotsToArmy}
-          deleteBots={this.deleteBots}
-        />
+        {
+          this.state.specsPage === null ? 
+          <BotCollection
+            bots={this.state.bots}
+            addBots={this.handleSpecPage}
+            deleteBots={this.deleteBots}
+          />
+          :
+         <BotSpecs goBack={this.goBack} bot={this.state.specsPage} addBots={this.addBotsToArmy}/>
+        }
       </div>
     );
   }
