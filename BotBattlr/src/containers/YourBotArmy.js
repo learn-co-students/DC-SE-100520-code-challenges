@@ -14,7 +14,9 @@ class YourBotArmy extends Component {
               <BotCard bot={bot} 
               key={bot.id} 
               addBots={this.props.removeBot} 
-              deleteBots={this.props.deleteBots}/>
+              deleteBots={this.props.deleteBots}
+                army={this.props.army}
+              />
             ))}
           </div>
         </div>

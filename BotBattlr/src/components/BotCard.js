@@ -45,12 +45,16 @@ const BotCard = (props) => {
           </span>
           <span>
             <div className="ui center aligned segment basic">
+             
+               props.army.includes  
               <button
                 className="ui mini red button"
                 onClick={() => props.deleteBots(props.bot)}
               >
                 x
               </button>
+             
+             
             </div>
           </span>
         </div>

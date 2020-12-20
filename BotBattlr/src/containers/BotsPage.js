@@ -12,7 +12,7 @@ class BotsPage extends Component {
     this.state = {
       bots: [],
       army: [],
-      specsPage: null,
+      specsPage: false,
     };
   }
 
@@ -31,6 +31,7 @@ class BotsPage extends Component {
       this.setState({
         army: [...this.state.army, bot],
       });
+      this.goBack()
     }
   };
 
@@ -61,7 +62,7 @@ class BotsPage extends Component {
 
   goBack = () => {
     this.setState({
-      specsPage: null,
+      specsPage: false,
     });
   };
 
@@ -74,7 +75,7 @@ class BotsPage extends Component {
           deleteBots={this.deleteBots}
         />
         {
-          this.state.specsPage === null ? 
+          this.state.specsPage === false ? 
           <BotCollection
             bots={this.state.bots}
             addBots={this.handleSpecPage}

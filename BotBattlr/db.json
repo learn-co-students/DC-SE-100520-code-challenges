@@ -1,18 +1,6 @@
 {
   "bots": [
     {
-      "id": 178,
-      "name": "Cc-34",
-      "health": 49,
-      "damage": 27,
-      "armor": 98,
-      "bot_class": "Defender",
-      "catchphrase": "0111000100001110011100101001001001",
-      "avatar_url": "https://robohash.org/quoassumendadolorem.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:12.190Z",
-      "updated_at": "2018-10-02T19:55:12.190Z"
-    },
-    {
       "id": 179,
       "name": "qX-29",
       "health": 49,
@@ -23,30 +11,6 @@
       "avatar_url": "https://robohash.org/quolaborumnisi.png?size=300x300&set=set1",
       "created_at": "2018-10-02T19:55:12.207Z",
       "updated_at": "2018-10-02T19:55:12.207Z"
-    },
-    {
-      "id": 180,
-      "name": "\\-94",
-      "health": 75,
-      "damage": 40,
-      "armor": 99,
-      "bot_class": "Defender",
-      "catchphrase": "010001011110101110011011101001010100010010111110",
-      "avatar_url": "https://robohash.org/invelitmaiores.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:12.230Z",
-      "updated_at": "2018-10-02T19:55:12.230Z"
-    },
-    {
-      "id": 181,
-      "name": "J-87",
-      "health": 97,
-      "damage": 40,
-      "armor": 72,
-      "bot_class": "Support",
-      "catchphrase": "1111000010010001110101100101010",
-      "avatar_url": "https://robohash.org/architectocorruptiaccusantium.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:12.245Z",
-      "updated_at": "2018-10-02T19:55:12.245Z"
     },
     {
       "id": 182,
