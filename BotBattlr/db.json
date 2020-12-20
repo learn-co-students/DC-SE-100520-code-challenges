@@ -1,42 +1,6 @@
 {
   "bots": [
     {
-      "id": 179,
-      "name": "qX-29",
-      "health": 49,
-      "damage": 88,
-      "armor": 30,
-      "bot_class": "Assault",
-      "catchphrase": "000000001000011111101101011101101010111011000110",
-      "avatar_url": "https://robohash.org/quolaborumnisi.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:12.207Z",
-      "updated_at": "2018-10-02T19:55:12.207Z"
-    },
-    {
-      "id": 182,
-      "name": "p-44",
-      "health": 70,
-      "damage": 31,
-      "armor": 82,
-      "bot_class": "Defender",
-      "catchphrase": "111101011000001011001011001001101000",
-      "avatar_url": "https://robohash.org/vitaeporrovoluptas.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:12.271Z",
-      "updated_at": "2018-10-02T19:55:12.271Z"
-    },
-    {
-      "id": 183,
-      "name": "yDg-64",
-      "health": 58,
-      "damage": 37,
-      "armor": 87,
-      "bot_class": "Defender",
-      "catchphrase": "1101001101000111110101010010000100010011011010",
-      "avatar_url": "https://robohash.org/rationeducimusveritatis.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:12.295Z",
-      "updated_at": "2018-10-02T19:55:12.295Z"
-    },
-    {
       "id": 184,
       "name": "u-40",
       "health": 41,
@@ -47,18 +11,6 @@
       "avatar_url": "https://robohash.org/consecteturinventoredolor.png?size=300x300&set=set1",
       "created_at": "2018-10-02T19:55:12.314Z",
       "updated_at": "2018-10-02T19:55:12.314Z"
-    },
-    {
-      "id": 185,
-      "name": "hin-85",
-      "health": 63,
-      "damage": 80,
-      "armor": 32,
-      "bot_class": "Assault",
-      "catchphrase": "00000010101001101010001101011010010101111100",
-      "avatar_url": "https://robohash.org/culpavoluptatemdeleniti.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:12.339Z",
-      "updated_at": "2018-10-02T19:55:12.339Z"
     },
     {
       "id": 186,

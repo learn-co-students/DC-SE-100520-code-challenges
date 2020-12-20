@@ -27,10 +27,14 @@ class BotsPage extends Component {
 
   addBotsToArmy = (bot) => {
     // we can only add bots once
+    let oldBot = this.state.bots.filter(oldBot => oldBot.id !== bot.id)
     if (!this.state.army.includes(bot)) {
       this.setState({
         army: [...this.state.army, bot],
+        bots: oldBot
+
       });
+
       this.goBack()
     }
   };
@@ -40,6 +44,7 @@ class BotsPage extends Component {
     let removeBot = this.state.army.filter((armyBot) => armyBot.id !== bot.id);
     this.setState({
       army: removeBot,
+      bots: [bot, ...this.state.bots]
     });
   };
 
@@ -82,7 +87,9 @@ class BotsPage extends Component {
             deleteBots={this.deleteBots}
           />
           :
-         <BotSpecs goBack={this.goBack} bot={this.state.specsPage} addBots={this.addBotsToArmy}/>
+         <BotSpecs goBack={this.goBack} 
+         bot={this.state.specsPage} 
+         addBots={this.addBotsToArmy}/>
         }
       </div>
     );

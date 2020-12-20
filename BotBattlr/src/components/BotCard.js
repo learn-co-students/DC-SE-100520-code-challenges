@@ -11,6 +11,7 @@ const botTypeClasses = {
 
 const BotCard = (props) => {
   return (
+    
     <div className="ui column">
       <div
         className="ui card"
@@ -18,7 +19,7 @@ const BotCard = (props) => {
         onClick={() => props.addBots(props.bot)}
       >
         <div className="image">
-          <img alt="oh no!" src={props.bot.avatar_url} />
+          <img alt="oh no!" src={props.bot.avatar_url}  />
         </div>
         <div className="content">
           <div className="header">
@@ -46,14 +47,13 @@ const BotCard = (props) => {
           <span>
             <div className="ui center aligned segment basic">
              
-               props.army.includes  
               <button
                 className="ui mini red button"
                 onClick={() => props.deleteBots(props.bot)}
               >
                 x
-              </button>
-             
+              </button> 
+        
              
             </div>
           </span>
