@@ -6,10 +6,10 @@ const botTypeClasses = {
   Support: "icon plus circle",
   Medic: "icon ambulance",
   Witch: "icon magic",
-  Captain: "icon star"
+  Captain: "icon star",
 };
 
-const BotCard = props => {
+const BotCard = (props) => {
   return (
     <div className="ui column">
       <div
@@ -47,9 +47,7 @@ const BotCard = props => {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() =>
-                  console.log("add code to connect event listener")
-                }
+                onClick={() => props.deleteBots(props.bot)}
               >
                 x
               </button>

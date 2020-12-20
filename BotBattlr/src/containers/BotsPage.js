@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
 
+const URL = "http://localhost:6001/bots/";
+
 class BotsPage extends Component {
   constructor() {
     // initalizes state
@@ -14,7 +16,7 @@ class BotsPage extends Component {
 
   async componentDidMount() {
     // fetching
-    let response = await fetch("http://localhost:6001/bots");
+    let response = await fetch(URL);
     let json = await response.json();
     this.setState({
       bots: json,
@@ -30,20 +32,41 @@ class BotsPage extends Component {
     }
   };
 
-removeBots = (bot)  => {
-  //if bot is clicked, remove bot from bot Army
- let removeBot = this.state.army.filter(armyBot => 
-  armyBot.id !== bot.id)
-  this.setState({
-    army: removeBot
-  })
-}
+  removeBots = (bot) => {
+    //if bot is clicked, remove bot from bot Army
+    let removeBot = this.state.army.filter((armyBot) => (
+      armyBot.id !== bot.id));
+    this.setState({
+      army: removeBot,
+    });
+  };
+
+  deleteBots = (bot) => {
+    fetch(URL + bot.id, {
+      method: 'DELETE'
+    }).then(resp => resp.json())
+    console.log("delete");
+    let deleteBot = this.state.bots.filter(deadBot => (
+      deadBot.id !== bot.id))
+    this.setState({
+      bots: deleteBot
+    })
+    this.removeBots(bot)
+  };
 
   render() {
     return (
       <div>
-        <YourBotArmy army={this.state.army} removeBot={this.removeBots}/>
-        <BotCollection bots={this.state.bots} addBots={this.addBotsToArmy} />
+        <YourBotArmy
+          army={this.state.army}
+          removeBot={this.removeBots}
+          deleteBots={this.deleteBots}
+        />
+        <BotCollection
+          bots={this.state.bots}
+          addBots={this.addBotsToArmy}
+          deleteBots={this.deleteBots}
+        />
       </div>
     );
   }
