@@ -20,14 +20,31 @@ class BotsPage extends Component {
     }
   }
 
+  deleteRecruit = (bot) => {
+    let freshArmy = this.state.army.filter(
+      newArmy => newArmy !== bot
+    )
+
+    this.setState({army: freshArmy })
+  }
+
+  destroyBot = (bot) => {
+
+    //if bot is clicked in bot collection, destroy all instances of bot
+    let allBots = this.state.bots.filter(
+      newBots => newBots !== bot
+    )
+    this.setState({bots: allBots})
+  }
+
   render() {
     return (
       <div>
           <div>
-            <YourBotArmy botData={this.state.army} /> 
+            <YourBotArmy botData={this.state.army} deleteRecruit={this.deleteRecruit} destroyBot={this.destroyBot} /> 
           </div>
           <div>
-            <BotCollection botData={this.state.bots} recruitArmy={this.recruitArmy} />
+            <BotCollection botData={this.state.bots} recruitArmy={this.recruitArmy} destroyBot={this.destroyBot} />
           </div>
         </div>
     );
