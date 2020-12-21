@@ -13,18 +13,6 @@
       "updated_at": "2018-10-02T19:55:10.800Z"
     },
     {
-      "id": 102,
-      "name": "RyM-66",
-      "health": 86,
-      "damage": 36,
-      "armor": 77,
-      "bot_class": "Medic",
-      "catchphrase": "0110011100000100011110100110011000011001",
-      "avatar_url": "https://robohash.org/quidemconsequaturaut.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:10.827Z",
-      "updated_at": "2018-10-02T19:55:10.827Z"
-    },
-    {
       "id": 103,
       "name": "P-24",
       "health": 88,
@@ -35,30 +23,6 @@
       "avatar_url": "https://robohash.org/idetcumque.png?size=300x300&set=set1",
       "created_at": "2018-10-02T19:55:10.844Z",
       "updated_at": "2018-10-02T19:55:10.844Z"
-    },
-    {
-      "id": 104,
-      "name": "qq-69",
-      "health": 74,
-      "damage": 29,
-      "armor": 95,
-      "bot_class": "Defender",
-      "catchphrase": "00011101001001000000101100001100110",
-      "avatar_url": "https://robohash.org/corruptieaqueexcepturi.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:10.856Z",
-      "updated_at": "2018-10-02T19:55:10.856Z"
-    },
-    {
-      "id": 105,
-      "name": "G`t-65",
-      "health": 62,
-      "damage": 98,
-      "armor": 31,
-      "bot_class": "Assault",
-      "catchphrase": "010101111110111111101101010110010100101",
-      "avatar_url": "https://robohash.org/nisinequequas.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:10.867Z",
-      "updated_at": "2018-10-02T19:55:10.867Z"
     },
     {
       "id": 106,
@@ -203,18 +167,6 @@
       "avatar_url": "https://robohash.org/eiuslaborumaliquid.png?size=300x300&set=set1",
       "created_at": "2018-10-02T19:55:11.133Z",
       "updated_at": "2018-10-02T19:55:11.133Z"
-    },
-    {
-      "id": 118,
-      "name": "s-96",
-      "health": 56,
-      "damage": 92,
-      "armor": 38,
-      "bot_class": "Witch",
-      "catchphrase": "110001011001010111010010110110000011110011100",
-      "avatar_url": "https://robohash.org/autearem.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:11.162Z",
-      "updated_at": "2018-10-02T19:55:11.162Z"
     },
     {
       "id": 119,
