@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+// my backend
 const botsURL = 'http://localhost:6001/bots'
 
 class BotsPage extends Component {
-
+// initializing state
   state = {
     bots: [],
     myArmy: []
   }
-
+  // fetch call made to grab all the bots from the backend
   componentDidMount(){
     fetch(botsURL)
       .then(res => res.json())
@@ -18,6 +19,7 @@ class BotsPage extends Component {
       })
     )
   }
+  // function used to add a bot to my army
   addBot = (bot) => {
     if(!this.state.myArmy.includes(bot)){
       this.setState({
@@ -25,28 +27,34 @@ class BotsPage extends Component {
       })
     }
   }
-
+  // function to remove a bot from my army on the frontend
   removeBot = (bot) => {
     let takenBot = this.state.myArmy.filter(theBot => theBot !== bot)
     this.setState({
       myArmy: takenBot
     })
   }
-
+// function used to remove a bot from the backend and also remove from my army if it is in the army
   retireBot = (bot) => {
     let retiredBot = this.state.myArmy.filter(theBot => theBot !== bot)
+    let deletedBot = this.state.bots.filter(theBot => theBot !== bot )
     fetch(`${botsURL}/${bot.id}`, {method: 'DELETE'})
       .then(res => res.json())
-      .then(dBot => this.setState({myArmy: retiredBot}))
+      .then(dBot => this.setState({
+        myArmy: retiredBot,
+        bots: deletedBot
+      }))
   }
-  //start here with your code for step one
+  // function used to filter bots
 
   render() {
     return <div>
+    {/* passing state and function properties to the containers  */}
       <YourBotArmy
         bots={this.state.myArmy} 
         addBot={this.addBot} 
-        removeBot={this.removeBot} />
+        removeBot={this.removeBot}
+        deleteBot={this.retireBot} />
       <BotCollection 
         addBot={this.addBot} 
         bots={this.state.bots} 
@@ -58,4 +66,3 @@ class BotsPage extends Component {
 
 export default BotsPage;
 
-// Discharge a bot from their service forever, by clicking the red button marked "x", which would delete the bot both from the backend and from the YourBotArmy on the frontend.
