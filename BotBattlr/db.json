@@ -13,30 +13,6 @@
       "updated_at": "2018-10-02T19:55:11.093Z"
     },
     {
-      "id": 116,
-      "name": "o-44",
-      "health": 51,
-      "damage": 90,
-      "armor": 36,
-      "bot_class": "Assault",
-      "catchphrase": "10001111010110110100111010011000011001100",
-      "avatar_url": "https://robohash.org/temporibusexercitationemprovident.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:11.119Z",
-      "updated_at": "2018-10-02T19:55:11.119Z"
-    },
-    {
-      "id": 117,
-      "name": "VL-37",
-      "health": 74,
-      "damage": 37,
-      "armor": 91,
-      "bot_class": "Defender",
-      "catchphrase": "01110101111110001001100000101011111001",
-      "avatar_url": "https://robohash.org/eiuslaborumaliquid.png?size=300x300&set=set1",
-      "created_at": "2018-10-02T19:55:11.133Z",
-      "updated_at": "2018-10-02T19:55:11.133Z"
-    },
-    {
       "id": 119,
       "name": "GQ-40",
       "health": 78,

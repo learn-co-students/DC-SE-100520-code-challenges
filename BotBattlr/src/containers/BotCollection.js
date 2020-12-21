@@ -10,7 +10,7 @@ class BotCollection extends Component {
             <BotCard
               bot={bot}
               key={bot.id}
-              handleClick={this.props.myBotArmy}
+              handleClick={this.props.handleClick}
               deleteABot={this.props.deleteABot}
             />
           ))}

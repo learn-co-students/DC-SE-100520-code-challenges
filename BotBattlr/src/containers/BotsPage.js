@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from "../components/BotSpecs";
 
 const URL = "http://localhost:6001/bots";
 
@@ -9,6 +10,7 @@ class BotsPage extends Component {
   state = {
     bots: [],
     myBots: [],
+    showOne: null,
   };
 
   async componentDidMount() {
@@ -42,6 +44,35 @@ class BotsPage extends Component {
     );
   };
 
+  showOneBot = (bot) => {
+    this.setState({ showOne: bot });
+  };
+
+  showAllBot = () => {
+    //if showOne is equal to null all the bots are shown
+    this.setState({ showOne: null });
+  };
+
+  renderCollection = () => {
+    if (this.state.showOne === null) {
+      return (
+        <BotCollection
+          botsData={this.state.bots}
+          handleClick={this.showOneBot}
+          deleteABot={this.deleteABot}
+        />
+      );
+    } else {
+      return (
+        <BotSpecs
+          bot={this.state.showOne}
+          showAllBot={this.showAllBot}
+          myBotArmy={this.myBotArmy}
+        />
+      );
+    }
+  };
+
   render() {
     return (
       <div>
@@ -50,11 +81,8 @@ class BotsPage extends Component {
           releaseBot={this.releaseBot}
           deleteABot={this.deleteABot}
         />
-        <BotCollection
-          botsData={this.state.bots}
-          myBotArmy={this.myBotArmy}
-          deleteABot={this.deleteABot}
-        />
+
+        {this.renderCollection()}
       </div>
     );
   }
