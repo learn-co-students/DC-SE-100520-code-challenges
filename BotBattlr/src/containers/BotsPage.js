@@ -13,7 +13,7 @@ class BotsPage extends Component {
       bots: [],
       army: [],
       specsPage: false,
-      filter: "All"
+      filter: "All",
     };
   }
 
@@ -28,41 +28,40 @@ class BotsPage extends Component {
 
   addBotsToArmy = (bot) => {
     // we can only add bots once
-    let oldBot = this.state.bots.filter(oldBot => oldBot.id !== bot.id)
+    let oldBot = this.state.bots.filter((oldBot) => oldBot.id !== bot.id);
     if (!this.state.army.includes(bot)) {
       this.setState({
         army: [...this.state.army, bot],
         // bots: oldBot
-
       });
-      this.goBack()
+      this.goBack();
     }
   };
 
   deleteBots = async (bot) => {
-    fetch(URL + bot.id, {
+    let newResp = await fetch(URL + bot.id, {
       method: "DELETE",
-    }).then((resp) => resp.json());
+    });
+    let json = newResp.json();
     console.log("delete");
     let deleteBot = this.state.bots.filter((deadBot) => deadBot.id !== bot.id);
     this.setState({
-      bots: deleteBot
+      bots: deleteBot,
     });
     this.removeBots(bot);
   };
-  
-  
+
   removeBots = (bot) => {
-    //if bot is clicked, remove bot from bot Army
-    let removeBot = this.state.army.filter((armyBot) => armyBot.id !== bot.id);
-    this.setState({
-      army: removeBot,
-      // bots: [bot, ...this.state.bots]
-    });
+
+      let removeBot = this.state.army.filter(
+        (armyBot) => armyBot.id !== bot.id
+      );
+      this.setState({
+        army: removeBot,
+        // bots: [bot, ...this.state.bots],
+      });
   };
 
- 
-  
   handleSpecPage = (bot) => {
     this.setState({
       specsPage: bot,
@@ -72,27 +71,27 @@ class BotsPage extends Component {
   goBack = () => {
     this.setState({
       specsPage: false,
-      filter: "All"
+      filter: "All",
     });
   };
 
   filterBots = () => {
-let filteredBots = null
-  if(this.state.filter === "All") {
-    filteredBots = this.state.bots 
-  }else {
-  filteredBots = this.state.bots.filter(bot => (
-    bot.bot_class === this.state.filter))
-  }
-  return filteredBots
-}
+    let filteredBots = null;
+    if (this.state.filter === "All") {
+      filteredBots = this.state.bots;
+    } else {
+      filteredBots = this.state.bots.filter(
+        (bot) => bot.bot_class === this.state.filter
+      );
+    }
+    return filteredBots;
+  };
 
   changeFilter = (newFilter) => {
     this.setState({
-      filter: newFilter
-    })
-  }
-
+      filter: newFilter,
+    });
+  };
 
   render() {
     return (
@@ -102,19 +101,20 @@ let filteredBots = null
           removeBot={this.removeBots}
           deleteBots={this.deleteBots}
         />
-        {
-          this.state.specsPage === false ? 
+        {this.state.specsPage === false ? (
           <BotCollection
             bots={this.filterBots()}
             addBots={this.handleSpecPage}
             deleteBots={this.deleteBots}
             filterBots={this.changeFilter}
           />
-          :
-         <BotSpecs goBack={this.goBack} 
-         bot={this.state.specsPage} 
-         addBots={this.addBotsToArmy}/>
-        }
+        ) : (
+          <BotSpecs
+            goBack={this.goBack}
+            bot={this.state.specsPage}
+            addBots={this.addBotsToArmy}
+          />
+        )}
       </div>
     );
   }
