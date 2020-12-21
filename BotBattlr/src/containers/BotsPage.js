@@ -13,6 +13,7 @@ class BotsPage extends Component {
     bots: [],             // hold all the bots
     enlisted: [],         // holds the ids of the enlisted bots
     specsView: false,     // when not false, display BotSpecs
+    classView: []         // store classes to filter bot container by
   }
 
   componentDidMount(){
@@ -90,7 +91,18 @@ class BotsPage extends Component {
   }
 
   botCollectionMinusYourArmy = () => {
-    return this.state.bots.filter(bot => this.justEnlistedBots().indexOf(bot) === -1)
+    let wellFilteredBots = this.state.bots.filter(bot => this.justEnlistedBots().indexOf(bot) === -1)
+    // added in logic for radio button selecting class
+    return (this.state.classView.length===0) ?  wellFilteredBots : wellFilteredBots.filter(findBot => this.state.classView.indexOf( findBot["bot_class"] )!== -1) 
+  }
+
+  viewByClass = (classSelect) => {
+    console.log(classSelect)
+    this.setState({classView: [...this.state.classView, classSelect]})
+  }
+
+  resetClassView = () => {
+    this.setState({classView: []})
   }
 
   render() {
@@ -99,7 +111,7 @@ class BotsPage extends Component {
                   <YourBotArmy bots={this.justEnlistedBots()} release={this.releaseBot} discharge={this.dischargeBot} />
                 </div>
                 <div>
-                  <SortBar sortby={this.sortBy} />
+                  <SortBar sortby={this.sortBy} reset={this.resetClassView} classView={this.state.classView} viewByClass={this.viewByClass}/>
                 </div>
                 <div>
                   {(this.state.specsView)?
