@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import BotCard from "../components/BotCard";
 
 class BotCollection extends Component {
   //your code here
@@ -7,8 +8,13 @@ class BotCollection extends Component {
     return (
       <div className="ui four column grid">
         <div className="row">
-          {/*...and here..*/}
-          Collection of all bots
+          {this.props.botsData.map((bot) => (
+            <BotCard
+              handleAddToArmy={this.props.handleAddToArmy}
+              key={bot.id}
+              bot={bot}
+            />
+          ))}
         </div>
       </div>
     );
