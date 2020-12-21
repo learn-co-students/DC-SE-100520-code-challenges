@@ -9,39 +9,39 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
-const BotCard = ({ botsData, handleAddToArmy }) => {
+const BotCard = ({ bot, handleAddToArmy }) => {
   return (
     <div className="ui column">
       <div
         className="ui card"
-        key={botsData.id}
-        onClick={() => handleAddToArmy(botsData.id)}
+        key={bot.id}
+        onClick={() => handleAddToArmy(bot.id)}
       >
         <div className="image">
-          <img alt="oh no!" src={botsData.avatar_url} />
+          <img alt="oh no!" src={bot.avatar_url} />
         </div>
         <div className="content">
           <div className="header">
-            {botsData.name}
-            <i className={botTypeClasses[botsData.bot_class]} />
+            {bot.name}
+            <i className={botTypeClasses[bot.bot_class]} />
           </div>
           <div className="meta text-wrap">
-            <small>{botsData.catchphrase}</small>
+            <small>{bot.catchphrase}</small>
           </div>
         </div>
         <div className="extra content">
           <span>
             <i className="icon heartbeat" />
-            {botsData.health}
+            {bot.health}
           </span>
 
           <span>
             <i className="icon lightning" />
-            {botsData.damage}
+            {bot.damage}
           </span>
           <span>
             <i className="icon shield" />
-            {botsData.armor}
+            {bot.armor}
           </span>
           <span>
             <div className="ui center aligned segment basic">
