@@ -23,13 +23,21 @@ class BotsPage extends Component {
       });
   };
 
+  removeFromArmy = (id) => {
+    const newArmy = this.state.myArmy.filter((bot) => bot != id);
+
+    this.setState({
+      myArmy: newArmy,
+    });
+  };
+
   render() {
     const army = this.state.bots.filter((bot) =>
       this.state.myArmy.includes(bot.id)
     );
     return (
       <div>
-        <YourBotArmy botsData={army} />
+        <YourBotArmy botsData={army} handleRemove={this.removeFromArmy} />
         <BotCollection
           botsData={this.state.bots}
           handleAddToArmy={this.addToArmy}
