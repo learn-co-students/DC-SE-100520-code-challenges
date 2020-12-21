@@ -5,6 +5,9 @@ import BotSpecs from "../components/BotSpecs"
 import SortBar from "../components/SortBar"
 
 const URL="http://localhost:6001/bots"
+
+let botClasses = ["Support", "Medic", "Assault", "Defender", "Captain", "Witch"]
+
 class BotsPage extends Component {
   //start here with your code for step one
   //ok
@@ -28,8 +31,16 @@ class BotsPage extends Component {
   }
   
   enlistBot = (enlistBot) => {
-    // if you can't find enlistBot's Id in state.enlisted, add it to the array
-    (!this.state.enlisted.find(botId => botId === enlistBot.id)) ? 
+    // if the bot is of a bot_class that is already in this.state.enlisted, return err
+    // build a filtered array of bots already enlisted
+    let enlistedBots = this.state.bots.filter(bot => this.state.enlisted.includes(bot.id));
+    // While we're at it, let's build an array of bot_class-es you still need in your army
+    let yourArmyHas = enlistedBots.map(bot => bot.bot_class);
+    let yourArmyNeeds = botClasses.filter(botClas => yourArmyHas.indexOf(botClas)===-1);
+    // check those bots to see if we already have one of enlistBot's bot_class 
+    (enlistedBots.find(bot => enlistBot.bot_class === bot.bot_class)) ?
+    alert("You already have a bot of class type: " + enlistBot.bot_class + ".  Try using the radio buttons to add one of the classes you're missing. Like " + yourArmyNeeds ) 
+    : (!this.state.enlisted.find(botId => botId === enlistBot.id)) ? 
     this.setState((state) => ({ enlisted: [...state.enlisted, enlistBot.id]})) 
     : console.log("Ayy this bot already enlisted!"); 
   }
