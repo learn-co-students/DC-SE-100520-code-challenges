@@ -23,7 +23,7 @@ After cloning down the project:
 
 ## Endpoints
 
-The base URL for your backend is: `http://localhost:6001`
+The base URL for your backend is: ``
 
 These are the endpoints you might need:
 

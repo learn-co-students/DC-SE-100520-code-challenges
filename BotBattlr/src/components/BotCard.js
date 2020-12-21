@@ -9,7 +9,7 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
-const BotCard = ({ bot, clickAction }) => {
+const BotCard = ({ bot, clickAction, deleteBot }) => {
   return (
     <div className="ui column">
       <div className="ui card" key={bot.id} onClick={() => clickAction(bot.id)}>
@@ -43,9 +43,7 @@ const BotCard = ({ bot, clickAction }) => {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() =>
-                  console.log("add code to connect event listener")
-                }
+                onClick={() => deleteBot(bot.id)}
               >
                 x
               </button>

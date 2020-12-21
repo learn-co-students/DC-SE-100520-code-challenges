@@ -31,6 +31,17 @@ class BotsPage extends Component {
     });
   };
 
+  deleteBot = (id) => {
+    console.log(`bot ${id} will be deleted forever`);
+
+    fetch(botsUrl + `/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  };
+
   render() {
     const army = this.state.bots.filter((bot) =>
       this.state.myArmy.includes(bot.id)
@@ -41,6 +52,7 @@ class BotsPage extends Component {
         <BotCollection
           botsData={this.state.bots}
           handleAddToArmy={this.addToArmy}
+          handleDeleteBot={this.deleteBot}
         />
       </div>
     );
