@@ -39,11 +39,14 @@ class BotsPage extends Component {
 
    deleteBotForever = (bot) => {
     // console.log(bot.id)
-  //  const botId = bot.id
-  //   const url = `${API}/${this.props.botId}`
-  //   console.log(url)
+   const botId = bot.id
 
-  //   this.props.onBotPage(url, {...this.props })
+  fetch(API + '/' + botId, {
+  method: "DELETE",
+});
+let newBotCollection = this.state.bots.filter( allBots => allBots.id !== bot.id )
+  this.setState({bots: newBotCollection })
+
 }
   
 
