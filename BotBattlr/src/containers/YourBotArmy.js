@@ -21,8 +21,8 @@ class YourBotArmy extends Component {
                 clickAction={this.props.removeBotFromArmy}
                 deleteBotForever={this.deleteBotForever}
               />
-              //in my components browser viewer I can see my bots are being added to the army bots array, I'm having an issue with the bots now rendering in the green area above, maybe I'm targeting the wrong element of the web app, or rendering the wrong comoponet. honestly I'm surprised the new bot army isn't rendering to the page
-            ))}
+            )) }
+            {/* {...this.deleteBotForever.includes(this.props.bot) ? true : this.props.bot === ""} */}
           </div>
         </div>
       </div>

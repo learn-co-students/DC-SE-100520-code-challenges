@@ -45,9 +45,15 @@ class BotsPage extends Component {
   method: "DELETE",
 });
 let newBotCollection = this.state.bots.filter( allBots => allBots.id !== bot.id )
-  this.setState({bots: newBotCollection })
-
+  this.setState({
+    bots: newBotCollection,
+    yourBotArmy: newBotCollection,
+  });
 }
+
+//   removeBotFromArmyForever = () => {
+
+// }
   
 
   render() {
