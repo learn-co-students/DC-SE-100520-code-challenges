@@ -37,18 +37,15 @@ class BotsPage extends Component {
   }
 
 
-   deleteBotForever = (e, bot) => {
-     console.log(bot)
-    // console.log('delete me forever and ever')
-    // console.log(id)
-  //   e.preventDefault()
-  // const response = fetch(API), {
-  //   method: "DELETE",
-  // });
-  // return response.json();
+   deleteBotForever = (bot) => {
+    // console.log(bot.id)
+  //  const botId = bot.id
+  //   const url = `${API}/${this.props.botId}`
+  //   console.log(url)
 
-  //need to still figure out logic for deleting the bot from front end/back end, think I need to target the bot id
-   }
+  //   this.props.onBotPage(url, {...this.props })
+}
+  
 
   render() {
     return (

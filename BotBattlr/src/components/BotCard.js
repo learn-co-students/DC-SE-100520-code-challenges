@@ -9,7 +9,7 @@ const botTypeClasses = {
   Captain: "icon star"
 };
 
-const BotCard = ({ bot, clickAction, deleteBotForever}) => {
+const BotCard = ({ bot, clickAction, deleteBotForever} )=> {
   //console.log(bot);
   return (
     <div className="ui column">
