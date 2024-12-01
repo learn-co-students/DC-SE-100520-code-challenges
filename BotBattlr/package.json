@@ -3,13 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "json-server": "^0.12.2",
+    "json-server": "^0.16.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17",
-    "semantic-ui-react": "^0.77.0"
+    "react-scripts": "^4.0.1",
+    "semantic-ui-react": "^2.0.1"
   },
   "scripts": {
     "start": "json-server --watch db.json -p 6001 & open http://localhost:6001/bots & PORT=6002 react-scripts start && fg"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
